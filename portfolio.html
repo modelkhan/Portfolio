@@ -1,0 +1,1910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safder Khan | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Mono:wght@400;700&family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* ===== CSS RESET & BASE STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Color palette - Cyber theme */
+            --primary-color: #00ff9d;
+            --secondary-color: #00d9ff;
+            --accent-color: #ff00aa;
+            --dark-bg: #0a0a0f;
+            --darker-bg: #050508;
+            --card-bg: rgba(15, 15, 25, 0.95);
+            --text-color: #e0e0ff;
+            --text-muted: #a0a0c0;
+            --border-color: rgba(0, 255, 157, 0.2);
+            --glow-color: rgba(0, 255, 157, 0.7);
+            
+            /* Fonts */
+            --font-heading: 'Orbitron', monospace;
+            --font-body: 'Space Mono', monospace;
+            --font-code: 'Share Tech Mono', monospace;
+            
+            /* Spacing */
+            --section-padding: 4rem 1rem;
+            --container-width: 1200px;
+            
+            /* Effects */
+            --transition: all 0.3s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            height: 100%;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            font-size: 16px;
+            min-height: 100vh;
+            overflow-y: auto;
+        }
+
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            padding: var(--section-padding);
+            position: relative;
+        }
+
+        /* ===== LOCK SCREEN ===== */
+        .lock-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--darker-bg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .lock-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .welcome-text {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: var(--primary-color);
+            text-shadow: 0 0 15px rgba(0, 255, 157, 0.5);
+            letter-spacing: 3px;
+        }
+
+        @media (max-width: 768px) {
+            .welcome-text {
+                font-size: 1.8rem;
+            }
+        }
+
+        .profile-circle {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 3px solid var(--primary-color);
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            box-shadow: 
+                0 0 20px var(--primary-color),
+                0 0 40px var(--primary-color),
+                inset 0 0 20px rgba(0, 255, 157, 0.3);
+            animation: pulse 2s infinite;
+            transition: var(--transition);
+            margin-bottom: 2rem;
+        }
+
+        .profile-circle:hover {
+            transform: scale(1.05);
+            box-shadow: 
+                0 0 30px var(--primary-color),
+                0 0 60px var(--primary-color),
+                inset 0 0 30px rgba(0, 255, 157, 0.5);
+        }
+
+        .profile-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .profile-circle:after {
+            content: 'CLICK TO ACCESS';
+            position: absolute;
+            bottom: -40px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-family: var(--font-code);
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 
+                    0 0 20px var(--primary-color),
+                    0 0 40px var(--primary-color),
+                    inset 0 0 20px rgba(0, 255, 157, 0.3);
+            }
+            50% {
+                box-shadow: 
+                    0 0 30px var(--primary-color),
+                    0 0 50px var(--primary-color),
+                    inset 0 0 25px rgba(0, 255, 157, 0.4);
+            }
+            100% {
+                box-shadow: 
+                    0 0 20px var(--primary-color),
+                    0 0 40px var(--primary-color),
+                    inset 0 0 20px rgba(0, 255, 157, 0.3);
+            }
+        }
+
+        /* ===== PASSWORD MODAL ===== */
+        .password-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(5, 5, 8, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .password-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .password-container {
+            background-color: var(--card-bg);
+            padding: 3rem;
+            border-radius: 15px;
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 0 40px rgba(0, 255, 157, 0.3);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .password-title {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .password-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-family: var(--font-code);
+            font-size: 0.9rem;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 1rem;
+            background-color: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            color: var(--text-color);
+            font-family: var(--font-code);
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .password-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 15px rgba(0, 255, 157, 0.3);
+        }
+
+        .password-submit {
+            background-color: var(--primary-color);
+            color: var(--dark-bg);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            font-family: var(--font-heading);
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+        }
+
+        .password-submit:hover {
+            background-color: transparent;
+            color: var(--primary-color);
+            box-shadow: 0 0 20px rgba(0, 255, 157, 0.5);
+        }
+
+        .password-error {
+            color: #ff5555;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .password-error.show {
+            display: block;
+        }
+
+        /* ===== ACCESSIBILITY ===== */
+        .skip-link {
+            position: absolute;
+            top: -50px;
+            left: 0;
+            background: var(--primary-color);
+            color: var(--dark-bg);
+            padding: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 15px rgba(0, 255, 157, 0.3);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2.section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), transparent);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* ===== HEADER & NAVIGATION ===== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            background-color: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .header.visible {
+            transform: translateY(0);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 0;
+        }
+
+        .logo a {
+            font-family: var(--font-code);
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-shadow: 0 0 10px rgba(0, 255, 157, 0.5);
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+            border-radius: 2px;
+            margin: 5px 0;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            padding-top: 8rem;
+            padding-bottom: 6rem;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 20%, rgba(0, 255, 157, 0.05) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .hero-tagline {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-family: var(--font-code);
+        }
+
+        .hero-location {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+        }
+
+        .hero-location .origin {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-left: 0.5rem;
+        }
+
+        .hero-statement {
+            font-family: var(--font-code);
+            color: var(--primary-color);
+            border-left: 3px solid var(--primary-color);
+            padding-left: 1rem;
+            margin: 2rem 0;
+            font-size: 1.1rem;
+        }
+
+        .profile-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .profile-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 255, 157, 0.2);
+        }
+
+        .profile-image-large {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+            background: linear-gradient(45deg, #0a0a0f, #1a1a2e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #profile-img-large {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .profile-card:hover #profile-img-large {
+            transform: scale(1.05);
+        }
+
+        .profile-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .profile-overlay p {
+            color: var(--primary-color);
+            font-family: var(--font-heading);
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .profile-info {
+            padding: 1.5rem;
+        }
+
+        .profile-info h3 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .profile-info ul {
+            list-style: none;
+            margin-bottom: 1rem;
+        }
+
+        .profile-info li {
+            padding: 0.3rem 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+
+        .scanline {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            animation: scanline 3s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* ===== ABOUT SECTION ===== */
+        .about {
+            background-color: var(--darker-bg);
+        }
+
+        .about-content {
+            max-width: 800px;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .about-highlights {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .highlight {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .highlight i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        /* ===== SKILLS SECTION ===== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 157, 0.1), transparent);
+            transition: var(--transition);
+        }
+
+        .skill-card:hover:before {
+            left: 100%;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(0, 255, 157, 0.2);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .skill-card h3 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .skill-card ul {
+            list-style: none;
+        }
+
+        .skill-card li {
+            padding: 0.3rem 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+            position: relative;
+            padding-left: 1.2rem;
+        }
+
+        .skill-card li:before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-family: var(--font-code);
+        }
+
+        /* ===== SECURITY FOCUS SECTION ===== */
+        .security {
+            background-color: var(--darker-bg);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .security-tile {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .security-tile:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 20px rgba(0, 255, 157, 0.2);
+        }
+
+        .tile-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .tile-header i {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+        }
+
+        .tile-header h3 {
+            margin: 0;
+            font-size: 1.3rem;
+        }
+
+        /* ===== EXPERIENCE TIMELINE ===== */
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline:before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, var(--primary-color), transparent);
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .timeline-date {
+            min-width: 120px;
+            padding: 0.5rem 1rem;
+            background-color: var(--primary-color);
+            color: var(--dark-bg);
+            border-radius: 20px;
+            text-align: center;
+            font-family: var(--font-heading);
+            font-weight: bold;
+            margin-right: 2rem;
+            height: fit-content;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline-content {
+            flex: 1;
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .timeline-content h3 {
+            color: var(--secondary-color);
+            margin-top: 0;
+        }
+
+        /* ===== EDUCATION SECTION ===== */
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .education-card {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .education-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(0, 217, 255, 0.2);
+        }
+
+        .edu-icon {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .edu-date {
+            font-family: var(--font-heading);
+            color: var(--primary-color);
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+
+        /* ===== PROJECTS SECTION ===== */
+        .projects {
+            background-color: var(--darker-bg);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: var(--primary-color);
+            transform: scaleY(0);
+            transition: var(--transition);
+            transform-origin: top;
+        }
+
+        .project-card:hover:before {
+            transform: scaleY(1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .project-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .project-card h3 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* ===== CERTIFICATIONS SECTION ===== */
+        .certs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .cert-card {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .cert-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .cert-card i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .cert-card h3 {
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .certs-note {
+            text-align: center;
+            font-style: italic;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ===== CONTACT SECTION ===== */
+        .contact-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            max-width: 1000px;
+            margin: 0 auto;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .contact-info {
+            padding: 2.5rem;
+            border-right: 1px solid var(--border-color);
+        }
+
+        .contact-cta {
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .contact-details {
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-top: 0.2rem;
+        }
+
+        .contact-sub {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 0.2rem;
+        }
+
+        .contact-note {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background-color: var(--darker-bg);
+            padding: 3rem 0 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-logo h3 {
+            color: var(--primary-color);
+            font-family: var(--font-code);
+            font-size: 1.8rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-disclaimer {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        /* ===== BACKGROUND EFFECTS ===== */
+        .grid-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 157, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 157, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        .scanline-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                transparent 50%,
+                rgba(0, 255, 157, 0.03) 50%
+            );
+            background-size: 100% 4px;
+            z-index: -1;
+            pointer-events: none;
+            animation: scanline-vertical 20s linear infinite;
+        }
+
+        @keyframes scanline-vertical {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100vh); }
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .profile-card {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+            
+            .contact-card {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-info {
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                flex-direction: column;
+                background-color: rgba(10, 10, 15, 0.98);
+                width: 250px;
+                height: 100vh;
+                text-align: left;
+                padding: 5rem 2rem;
+                gap: 1.5rem;
+                transition: right 0.3s ease;
+                backdrop-filter: blur(10px);
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .menu-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .menu-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .hero {
+                padding-top: 6rem;
+                padding-bottom: 5rem;
+            }
+            
+            .nav-links a {
+                font-size: 1.1rem;
+                padding: 0.8rem 0;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .skills-grid,
+            .security-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline:before {
+                left: 15px;
+            }
+            
+            .timeline-item {
+                flex-direction: column;
+            }
+            
+            .timeline-date {
+                margin-right: 0;
+                margin-bottom: 1rem;
+                width: fit-content;
+            }
+            
+            .password-container {
+                padding: 2rem;
+            }
+            
+            .password-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.4rem;
+            }
+            
+            .hero-tagline {
+                font-size: 1rem;
+            }
+            
+            .profile-image-large {
+                height: 200px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .contact-card {
+                margin: 0 1rem;
+            }
+            
+            .contact-info, .contact-cta {
+                padding: 1.5rem;
+            }
+            
+            .welcome-text {
+                font-size: 1.5rem;
+            }
+            
+            .profile-circle {
+                width: 150px;
+                height: 150px;
+            }
+        }
+
+        /* Fix for very small screens */
+        @media (max-width: 360px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            section {
+                padding: 3rem 0.5rem;
+            }
+            
+            .hero-content {
+                gap: 2rem;
+            }
+            
+            .profile-card {
+                margin: 0 0.5rem;
+            }
+            
+            .password-container {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Hide portfolio content initially */
+        .portfolio-content {
+            display: none;
+        }
+
+        .portfolio-content.visible {
+            display: block;
+        }
+
+        /* Loading animation */
+        .loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--darker-bg);
+            z-index: 10001;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .loading.active {
+            display: flex;
+        }
+
+        .loading-spinner {
+            width: 80px;
+            height: 80px;
+            border: 5px solid rgba(0, 255, 157, 0.3);
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 2rem;
+        }
+
+        .loading-text {
+            font-family: var(--font-code);
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Lock Screen -->
+    <div class="lock-screen" id="lockScreen">
+        <div class="welcome-text">Welcome To My Portfolio</div>
+        <div class="profile-circle" id="profileCircle">
+            <img src="https://raw.githubusercontent.com/modelkhan/Portfolio/refs/heads/main/profile2.png" alt="Safder Khan">
+        </div>
+    </div>
+
+    <!-- Password Modal -->
+    <div class="password-modal" id="passwordModal">
+        <div class="password-container">
+            <h2 class="password-title">ACCESS REQUIRED</h2>
+            <p class="password-subtitle">Please enter the password provided during your interview</p>
+            <input type="password" class="password-input" id="passwordInput" placeholder="Enter password" autocomplete="off">
+            <button class="password-submit" id="passwordSubmit">UNLOCK PORTFOLIO</button>
+            <div class="password-error" id="passwordError">Incorrect password. Please try again.</div>
+        </div>
+    </div>
+
+    <!-- Loading Screen -->
+    <div class="loading" id="loadingScreen">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">LOADING PORTFOLIO...</div>
+    </div>
+
+    <!-- Portfolio Content (Hidden until unlocked) -->
+    <div class="portfolio-content" id="portfolioContent">
+        <!-- Skip to content link for accessibility -->
+        <a href="#main-content" class="skip-link">Skip to main content</a>
+
+        <!-- Header with sticky navigation -->
+        <header class="header" id="header">
+            <div class="container">
+                <nav class="navbar">
+                    <div class="logo">
+                        <a href="#hero">PORTFOLIO</a>
+                    </div>
+                    <button class="menu-toggle" id="menuToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <ul class="nav-links" id="navLinks">
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#skills">Skills</a></li>
+                        <li><a href="#security">Security Focus</a></li>
+                        <li><a href="#experience">Experience</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main content -->
+        <main id="main-content">
+            <!-- Hero Section -->
+            <section id="hero" class="hero">
+                <div class="container">
+                    <div class="hero-content">
+                        <div class="hero-text">
+                            <h1 class="hero-title">Safder Khan</h1>
+                            <h2 class="hero-subtitle">Cybersecurity Specialist</h2>
+                            <p class="hero-tagline">Linux Tooling • OSINT • Secure Applications</p>
+                            <p class="hero-location">
+                                <i class="fas fa-map-marker-alt"></i> Abbottabad City, KPK, Pakistan
+                                <span class="origin">(Originally from North Waziristan, KPK)</span>
+                            </p>
+                            <p class="hero-statement">"Ethical Security Testing, OSINT, Networking, Linux Hardening & Tooling"</p>
+                        </div>
+                        <div class="profile-card">
+                            <div class="profile-image-large">
+                                <img src="https://raw.githubusercontent.com/modelkhan/Portfolio/refs/heads/main/profile2.png" alt="Safder Khan" id="profile-img-large">
+                                <div class="profile-overlay">
+                                    <p>Cybersecurity Specialist</p>
+                                </div>
+                            </div>
+                            <div class="profile-info">
+                                <h3>Quick Facts</h3>
+                                <ul>
+                                    <li><strong>Age:</strong> 18-19</li>
+                                    <li><strong>Experience:</strong> 3.5+ years</li>
+                                    <li><strong>Focus:</strong> Ethical Security</li>
+                                    <li><strong>Web Development:</strong> HTML, CSS, JavaScript</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scanline"></div>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section id="about" class="about">
+                <div class="container">
+                    <h2 class="section-title">About Me</h2>
+                    <div class="about-content">
+                        <p class="about-text">
+                            I'm a dedicated cybersecurity enthusiast with over 3.5 years of experience in creating secure digital solutions. My work focuses on ethical security practices, combining technical expertise with cybersecurity knowledge to build robust, secure applications and systems.
+                        </p>
+                        <p class="about-text">
+                            Based in Abbottabad, Pakistan, I specialize in Linux tool development, OSINT techniques, networking fundamentals, and Python automation. My approach to cybersecurity is strictly ethical, focusing on defensive security, penetration testing for vulnerability assessment, and security hardening.
+                        </p>
+                        <div class="about-highlights">
+                            <div class="highlight">
+                                <i class="fas fa-shield-alt"></i>
+                                <p>Ethical Security Focus</p>
+                            </div>
+                            <div class="highlight">
+                                <i class="fas fa-code"></i>
+                                <p>Web Development</p>
+                            </div>
+                            <div class="highlight">
+                                <i class="fas fa-tools"></i>
+                                <p>Custom Tool Development</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Core Skills Section -->
+            <section id="skills" class="skills">
+                <div class="container">
+                    <h2 class="section-title">Core Skills</h2>
+                    <div class="skills-grid">
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <h3>Web Development</h3>
+                            <ul>
+                                <li>HTML5 & CSS3</li>
+                                <li>JavaScript (ES6+)</li>
+                                <li>Bootstrap Framework</li>
+                                <li>Responsive Design</li>
+                            </ul>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <i class="fab fa-python"></i>
+                            </div>
+                            <h3>Python & Automation</h3>
+                            <ul>
+                                <li>Python Scripting</li>
+                                <li>Automation Tools</li>
+                                <li>CLI Applications</li>
+                                <li>Data Processing</li>
+                            </ul>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <i class="fab fa-linux"></i>
+                            </div>
+                            <h3>Linux & Termux Tooling</h3>
+                            <ul>
+                                <li>Linux Administration</li>
+                                <li>Bash Scripting</li>
+                                <li>Termux Development</li>
+                                <li>Custom Tool Creation</li>
+                            </ul>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <i class="fas fa-network-wired"></i>
+                            </div>
+                            <h3>Networking & OSINT</h3>
+                            <ul>
+                                <li>Network Protocols</li>
+                                <li>OSINT Techniques</li>
+                                <li>Information Gathering</li>
+                                <li>Network Security</li>
+                            </ul>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <i class="fas fa-user-shield"></i>
+                            </div>
+                            <h3>Cybersecurity (Ethical)</h3>
+                            <ul>
+                                <li>Security Testing</li>
+                                <li>Vulnerability Assessment</li>
+                                <li>Security Hardening</li>
+                                <li>Ethical Hacking</li>
+                            </ul>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <i class="fas fa-video"></i>
+                            </div>
+                            <h3>Video Editing</h3>
+                            <ul>
+                                <li>Content Creation</li>
+                                <li>Technical Tutorials</li>
+                                <li>Screen Recording</li>
+                                <li>Educational Media</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Security Focus Section -->
+            <section id="security" class="security">
+                <div class="container">
+                    <h2 class="section-title">Security Focus</h2>
+                    <p class="section-subtitle">Ethical cybersecurity capabilities with defensive security mindset</p>
+                    <div class="security-grid">
+                        <div class="security-tile">
+                            <div class="tile-header">
+                                <i class="fas fa-search"></i>
+                                <h3>Ethical Security Testing</h3>
+                            </div>
+                            <p>Authorized vulnerability assessment and penetration testing with proper scope and permissions.</p>
+                        </div>
+                        <div class="security-tile">
+                            <div class="tile-header">
+                                <i class="fas fa-lock"></i>
+                                <h3>Linux Hardening & Scripting</h3>
+                            </div>
+                            <p>System security hardening, bash automation, and secure configuration management for Linux environments.</p>
+                        </div>
+                        <div class="security-tile">
+                            <div class="tile-header">
+                                <i class="fas fa-server"></i>
+                                <h3>Networking Fundamentals</h3>
+                            </div>
+                            <p>Understanding of network protocols, architecture, and security principles for defensive network operations.</p>
+                        </div>
+                        <div class="security-tile">
+                            <div class="tile-header">
+                                <i class="fas fa-binoculars"></i>
+                                <h3>OSINT Workflows</h3>
+                            </div>
+                            <p>Open-source intelligence gathering techniques for security reconnaissance and threat intelligence.</p>
+                        </div>
+                        <div class="security-tile">
+                            <div class="tile-header">
+                                <i class="fas fa-globe"></i>
+                                <h3>Web Application Security</h3>
+                            </div>
+                            <p>Secure development practices, vulnerability mitigation, and defensive coding techniques for web applications.</p>
+                        </div>
+                        <div class="security-tile">
+                            <div class="tile-header">
+                                <i class="fas fa-robot"></i>
+                                <h3>Automation & Tooling</h3>
+                            </div>
+                            <p>Development of custom security tools, automation scripts, and efficiency-enhancing utilities.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Experience Timeline -->
+            <section id="experience" class="experience">
+                <div class="container">
+                    <h2 class="section-title">Experience Timeline</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">2.5+ Years</div>
+                            <div class="timeline-content">
+                                <h3>Web Development & Design</h3>
+                                <p>Professional experience in creating responsive, user-friendly websites and web applications with a focus on security and performance.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">4.5+ Years</div>
+                            <div class="timeline-content">
+                                <h3>Linux/Termux Tools + Python Automation</h3>
+                                <p>Development of custom tools, scripts, and automation solutions for Linux and Termux environments to enhance security and productivity.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">4+ Years</div>
+                            <div class="timeline-content">
+                                <h3>Cybersecurity (Ethical Learning & Hands-on Labs)</h3>
+                                <p>Practical experience through ethical security labs, vulnerability testing in controlled environments, and defensive security practice.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Education Section -->
+            <section class="education">
+                <div class="container">
+                    <h2 class="section-title">Education</h2>
+                    <div class="education-grid">
+                        <div class="education-card">
+                            <div class="edu-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <h3>School</h3>
+                            <p class="edu-date">2023-2024</p>
+                            <p>Completed secondary education with focus on computer science fundamentals.</p>
+                        </div>
+                        <div class="education-card">
+                            <div class="edu-icon">
+                                <i class="fas fa-university"></i>
+                            </div>
+                            <h3>College</h3>
+                            <p class="edu-date">2025-2026</p>
+                            <p>Currently pursuing advanced studies in computer science and cybersecurity.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects Section -->
+            <section id="projects" class="projects">
+                <div class="container">
+                    <h2 class="section-title">Projects</h2>
+                    <div class="projects-grid">
+                        <div class="project-card">
+                            <div class="project-icon">
+                                <i class="fab fa-linux"></i>
+                            </div>
+                            <h3>Linux Automation Toolkit</h3>
+                            <p>A collection of bash scripts for automating security tasks, system monitoring, and administrative operations on Linux systems.</p>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h3>Termux Utility Suite</h3>
+                            <p>Android-based security and productivity tools for Termux environment, including network scanning and information gathering utilities.</p>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <h3>Secure Portfolio Web</h3>
+                            <p>This responsive, cybersecurity-themed portfolio website built with pure HTML/CSS, following security and accessibility best practices.</p>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-icon">
+                                <i class="fab fa-python"></i>
+                            </div>
+                            <h3>Python File Tool</h3>
+                            <p>A Python utility for secure file operations, encryption, and organization with focus on data integrity and access control.</p>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-icon">
+                                <i class="fas fa-wifi"></i>
+                            </div>
+                            <h3>Network Scanner (Educational)</h3>
+                            <p>Educational tool for learning network fundamentals, demonstrating how network discovery works for defensive security purposes.</p>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <h3>OSINT Notes Manager</h3>
+                            <p>A secure web application for organizing and managing OSINT research data with encryption and access control features.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Certifications Section -->
+            <section class="certifications">
+                <div class="container">
+                    <h2 class="section-title">Certifications</h2>
+                    <div class="certs-grid">
+                        <div class="cert-card">
+                            <i class="fas fa-certificate"></i>
+                            <h3>Cybersecurity Fundamentals</h3>
+                            <p>Currently pursuing industry-recognized cybersecurity certifications</p>
+                        </div>
+                        <div class="cert-card">
+                            <i class="fas fa-certificate"></i>
+                            <h3>Web Development</h3>
+                            <p>Certifications in modern web development technologies and frameworks</p>
+                        </div>
+                        <div class="cert-card">
+                            <i class="fas fa-certificate"></i>
+                            <h3>Linux Administration</h3>
+                            <p>Linux system administration and security certification track</p>
+                        </div>
+                        <div class="cert-card">
+                            <i class="fas fa-certificate"></i>
+                            <h3>Python Programming</h3>
+                            <p>Advanced Python programming and automation certifications</p>
+                        </div>
+                    </div>
+                    <p class="certs-note">Currently pursuing additional certifications in cybersecurity and web development.</p>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="contact">
+                <div class="container">
+                    <h2 class="section-title">Contact Information</h2>
+                    <div class="contact-card">
+                        <div class="contact-info">
+                            <h3>Open to Opportunities</h3>
+                            <p>Seeking entry-level cybersecurity positions, internships, or junior web development roles to apply my skills and continue professional growth.</p>
+                            <div class="contact-details">
+                                <div class="contact-item">
+                                    <i class="fas fa-envelope"></i>
+                                    <div>
+                                        <h4>Email</h4>
+                                        <p>gmail@gmail.com</p>
+                                    </div>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <div>
+                                        <h4>Location</h4>
+                                        <p>Abbottabad City, KPK, Pakistan</p>
+                                        <p class="contact-sub">Originally from North Waziristan, KPK</p>
+                                    </div>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-user-shield"></i>
+                                    <div>
+                                        <h4>Focus</h4>
+                                        <p>Ethical Cybersecurity & Web Development</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contact-cta">
+                            <h3>Interview Mode</h3>
+                            <p>This portfolio is designed for interview purposes only. All content is view-only and cannot be downloaded.</p>
+                            <div class="contact-note">Access granted via password during interview process</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-logo">
+                        <h3>SAFDER//KHAN</h3>
+                        <p>Cybersecurity Specialist</p>
+                    </div>
+                    <div class="footer-links">
+                        <span><i class="fas fa-code"></i> View-Only Portfolio</span>
+                        <span><i class="fas fa-shield-alt"></i> Interview Mode</span>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; <span id="current-year">2026</span> Safder Khan. All rights reserved.</p>
+                    <p class="footer-disclaimer">This portfolio is for interview purposes only. Content cannot be downloaded or copied.</p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Matrix-like background effect -->
+        <div class="grid-background"></div>
+        <div class="scanline-overlay"></div>
+    </div>
+
+    <script>
+        // Set the correct password (change this to your preferred password)
+        const CORRECT_PASSWORD = "Interview@2026";
+        
+        // DOM Elements
+        const lockScreen = document.getElementById('lockScreen');
+        const profileCircle = document.getElementById('profileCircle');
+        const passwordModal = document.getElementById('passwordModal');
+        const passwordInput = document.getElementById('passwordInput');
+        const passwordSubmit = document.getElementById('passwordSubmit');
+        const passwordError = document.getElementById('passwordError');
+        const loadingScreen = document.getElementById('loadingScreen');
+        const portfolioContent = document.getElementById('portfolioContent');
+        const header = document.getElementById('header');
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        // Current year for footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Show password modal when profile circle is clicked
+        profileCircle.addEventListener('click', function() {
+            passwordModal.classList.add('active');
+            passwordInput.focus();
+        });
+        
+        // Handle password submission
+        passwordSubmit.addEventListener('click', checkPassword);
+        passwordInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+        
+        // Password validation function
+        function checkPassword() {
+            const enteredPassword = passwordInput.value.trim();
+            
+            if (enteredPassword === CORRECT_PASSWORD) {
+                // Hide error if visible
+                passwordError.classList.remove('show');
+                
+                // Hide password modal
+                passwordModal.classList.remove('active');
+                
+                // Show loading screen
+                loadingScreen.classList.add('active');
+                
+                // Simulate loading delay
+                setTimeout(function() {
+                    // Hide loading screen
+                    loadingScreen.classList.remove('active');
+                    
+                    // Hide lock screen with animation
+                    lockScreen.classList.add('hidden');
+                    
+                    // Show portfolio content
+                    portfolioContent.classList.add('visible');
+                    
+                    // Show header after a short delay
+                    setTimeout(function() {
+                        header.classList.add('visible');
+                    }, 500);
+                    
+                    // Clear password input
+                    passwordInput.value = '';
+                }, 1500);
+            } else {
+                // Show error message
+                passwordError.classList.add('show');
+                
+                // Clear input and focus
+                passwordInput.value = '';
+                passwordInput.focus();
+                
+                // Shake animation for error
+                passwordInput.style.animation = 'none';
+                setTimeout(() => {
+                    passwordInput.style.animation = 'shake 0.5s';
+                }, 10);
+                
+                // Remove shake animation after it completes
+                setTimeout(() => {
+                    passwordInput.style.animation = '';
+                }, 500);
+            }
+        }
+        
+        // Add CSS for shake animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% {transform: translateX(0);}
+                10%, 30%, 50%, 70%, 90% {transform: translateX(-5px);}
+                20%, 40%, 60%, 80% {transform: translateX(5px);}
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Mobile menu toggle
+        menuToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuToggle.classList.remove('active');
+            });
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const isClickInsideNav = navLinks.contains(event.target);
+            const isClickOnToggle = menuToggle.contains(event.target);
+            
+            if (!isClickInsideNav && !isClickOnToggle && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+        });
+        
+        // Show/hide header on scroll
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Scrolling down
+                header.classList.remove('visible');
+            } else {
+                // Scrolling up
+                if (scrollTop > 50) {
+                    header.classList.add('visible');
+                }
+            }
+            
+            lastScrollTop = scrollTop;
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
