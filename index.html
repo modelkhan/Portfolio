@@ -26,6 +26,7 @@
             --text-muted: #a0a0c0;
             --border-color: rgba(0, 255, 157, 0.2);
             --glow-color: rgba(0, 255, 157, 0.7);
+            --youtube-red: #ff0000;
             
             /* Fonts */
             --font-heading: 'Orbitron', monospace;
@@ -496,6 +497,73 @@
             padding-left: 1rem;
             margin: 2rem 0;
             font-size: 1.1rem;
+        }
+
+        /* ===== SOCIAL LINKS ===== */
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.2rem;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .social-link.youtube {
+            border-color: var(--youtube-red);
+        }
+
+        .social-link.youtube:hover {
+            background-color: var(--youtube-red);
+            border-color: var(--youtube-red);
+            color: white;
+            box-shadow: 0 5px 20px rgba(255, 0, 0, 0.4);
+        }
+
+        .social-link.youtube:hover i {
+            color: white;
+        }
+
+        .social-link.youtube i {
+            color: var(--youtube-red);
+            font-size: 1.2rem;
+        }
+
+        .social-link.verified {
+            background: linear-gradient(135deg, rgba(0, 255, 157, 0.1), rgba(0, 217, 255, 0.1));
+            border-color: var(--primary-color);
+        }
+
+        .social-link.verified:hover {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--dark-bg);
+        }
+
+        .verify-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.75rem;
+            background-color: var(--primary-color);
+            color: var(--dark-bg);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-left: 0.5rem;
         }
 
         .profile-card {
@@ -975,6 +1043,51 @@
             font-style: italic;
         }
 
+        /* ===== YOUTUBE VERIFY SECTION ===== */
+        .youtube-verify {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(255, 0, 0, 0.1), rgba(255, 0, 0, 0.05));
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .youtube-verify h4 {
+            color: var(--youtube-red);
+            font-size: 1rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .youtube-verify p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .youtube-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--youtube-red);
+            color: white;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: var(--transition);
+        }
+
+        .youtube-btn:hover {
+            background-color: #cc0000;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
+        }
+
         /* ===== FOOTER ===== */
         .footer {
             background-color: var(--darker-bg);
@@ -1007,6 +1120,46 @@
             align-items: center;
             gap: 0.5rem;
             color: var(--text-muted);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .footer-social a:hover {
+            transform: translateY(-3px);
+        }
+
+        .footer-social a.youtube-social:hover {
+            background-color: var(--youtube-red);
+            border-color: var(--youtube-red);
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
+        }
+
+        .footer-social a.youtube-social:hover i {
+            color: white;
+        }
+
+        .footer-social a i {
+            font-size: 1.1rem;
+        }
+
+        .footer-social a.youtube-social i {
+            color: var(--youtube-red);
         }
 
         .footer-bottom {
@@ -1166,6 +1319,14 @@
             
             .password-title {
                 font-size: 1.5rem;
+            }
+
+            .social-links {
+                flex-direction: column;
+            }
+
+            .social-link {
+                justify-content: center;
             }
         }
 
@@ -1357,6 +1518,15 @@
                                 <span class="origin">(Originally from North Waziristan, KPK)</span>
                             </p>
                             <p class="hero-statement">"Ethical Security Testing, OSINT, Networking, Linux Hardening & Tools"</p>
+                            
+                            <!-- Social Links with YouTube Verification -->
+                            <div class="social-links">
+                                <a href="https://www.youtube.com/@sigma_ghost_hacking" target="_blank" rel="noopener noreferrer" class="social-link youtube">
+                                    <i class="fab fa-youtube"></i>
+                                    <span>YouTube Channel</span>
+                                    <span class="verify-badge"><i class="fas fa-check"></i> VERIFIED</span>
+                                </a>
+                            </div>
                         </div>
                         <div class="profile-card">
                             <div class="profile-image-large">
@@ -1710,11 +1880,29 @@
                                     </div>
                                 </div>
                             </div>
+                            
+                            <!-- YouTube Verification Section -->
+                            <div class="youtube-verify">
+                                <h4><i class="fab fa-youtube"></i> Verify This Portfolio</h4>
+                                <p>Check out my YouTube channel to verify this is my original work</p>
+                                <a href="https://www.youtube.com/@sigma_ghost_hacking" target="_blank" rel="noopener noreferrer" class="youtube-btn">
+                                    <i class="fab fa-youtube"></i> Visit My Channel
+                                </a>
+                            </div>
                         </div>
                         <div class="contact-cta">
                             <h3>Interview Mode</h3>
                             <p>This portfolio is designed for interview purposes only. All content is view-only and cannot be downloaded.</p>
                             <div class="contact-note">Access granted via password during interview process</div>
+                            
+                            <!-- Additional YouTube Link in CTA -->
+                            <div class="youtube-verify" style="margin-top: 2rem;">
+                                <h4><i class="fas fa-link"></i> Proof of Ownership</h4>
+                                <p>My YouTube channel serves as proof that this portfolio code is mine</p>
+                                <a href="https://www.youtube.com/@sigma_ghost_hacking" target="_blank" rel="noopener noreferrer" class="youtube-btn">
+                                    <i class="fab fa-youtube"></i> @sigma_ghost_hacking
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1728,10 +1916,17 @@
                     <div class="footer-logo">
                         <h3>SAFDER//KHAN</h3>
                         <p>Cybersecurity Specialist</p>
+                        <!-- YouTube Social Link in Footer -->
+                        <div class="footer-social">
+                            <a href="https://www.youtube.com/@sigma_ghost_hacking" target="_blank" rel="noopener noreferrer" class="youtube-social" title="YouTube Channel - Proof of Ownership">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
                     </div>
                     <div class="footer-links">
                         <span><i class="fas fa-code"></i> View-Only Portfolio</span>
                         <span><i class="fas fa-shield-alt"></i> Interview Mode</span>
+                        <span><i class="fab fa-youtube"></i> <a href="https://www.youtube.com/@sigma_ghost_hacking" target="_blank" rel="noopener noreferrer">Verified Channel</a></span>
                     </div>
                 </div>
                 <div class="footer-bottom">
@@ -1908,5 +2103,3 @@
     </script>
 </body>
 </html>
-
-
